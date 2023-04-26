@@ -464,7 +464,7 @@ if __name__ == "__main__":
 
     else:
         """
-        Code to run test cases
+        Code to run from a file
         """
         with open(file_input) as f:
             with open(file_output, 'w') as w:
@@ -485,9 +485,9 @@ if __name__ == "__main__":
                         print(premises[-1] + "\n")
                         w.write(premises[-1] + "\n")
                         # collect statements
-                        statements = list(map(lambda i: Statement(i), premises[:-1]))
+                        statements = list(map(lambda i: Statement(i.strip()), premises[:-1]))
                         # negate conclusion 
-                        statements.append(Statement("~("+premises[-1]+")"))
+                        statements.append(Statement("~("+premises[-1].strip()+")"))
                         # turn statements into CNF 
                         statements = list(map(lambda s: s.toNNF().clean().toCNF(), statements))
                         # generate clauses
@@ -509,7 +509,7 @@ if __name__ == "__main__":
                         print(parts[1])
                         w.write(parts[1]+"\n")
                         # negate statement
-                        statements = list(map(lambda i: Statement("~("+i+")"), premises))
+                        statements = list(map(lambda i: Statement("~("+i.strip()+")"), premises))
                         # turn into CNF
                         statements = list(map(lambda s: s.toNNF().clean().toCNF(), statements))
                         # generate clauses
